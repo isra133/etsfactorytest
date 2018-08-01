@@ -7,11 +7,14 @@
 </template>
 
 <script lang="js">
+
+  import axios from 'axios'
+  import VueAxios from 'vue-axios'
+
   export default  {
     name: 'home',
     props: [],
     mounted() {
-
     },
     data() {
       return {
@@ -24,11 +27,11 @@
     computed: {
 
     }
-}
+  }
 </script>
 
 <style scoped lang="scss">
-  .home {
+.home {
 
-  }
+}
 </style>
