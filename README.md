@@ -1,4 +1,4 @@
-# etsfactorytest-3
+# etsfactorytest
 
 ## Project setup
 ```
