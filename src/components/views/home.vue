@@ -1,31 +1,43 @@
 <template lang="html">
 
   <section class="home">
-    <h1>home Component</h1>
+    
+
+    <template v-for="(symbol, key) in symbols">
+      <symbol-el :data="symbol" :key="key"></symbol-el>
+    </template>
+
   </section>
 
 </template>
 
 <script lang="js">
 
-  import {mapActions} from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
+
+  import symbol_el from '@/components/parts/symbol-list-el';
 
   export default  {
     name: 'home',
     props: [],
     mounted() {
-      this.getAllSymbols();
+      this.requestAllSymbols();
     },
     data() {
       return {
 
       }
     },
-    methods: {
-        ...mapActions(['getAllSymbols'])
+    computed : {
+      ...mapGetters({
+        symbols : 'getAllSymbols'
+      })
     },
-    computed: {
-
+    methods: {
+      ...mapActions(['requestAllSymbols'])
+    },
+    components: {
+      'symbol-el' : symbol_el
     }
   }
 </script>

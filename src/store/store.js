@@ -13,15 +13,18 @@ export default new Vuex.Store({
   },
   getters : {
     getServer : state => state.apiserver,
+    getAllSymbols : state => state.symbols
   },
   actions : {
-   getAllSymbols : ({commit}) => {
+   requestAllSymbols : ({commit}) => {
+
     Vue.http.get('http://jsonstub.com/etsfintech/symbols').then(response => {
       commit('setAllSymbols', response.body);
     });
-   }
- },
- mutations : {
+
+  }
+},
+mutations : {
   setAllSymbols (state, symbols){
     state.symbols = symbols;
   }
