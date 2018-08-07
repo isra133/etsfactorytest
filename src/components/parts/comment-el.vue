@@ -14,6 +14,8 @@
 
     <button @click="toggleEditing">Editar</button>
 
+    <button @click="toggleFav(data)">Favorito {{data.fav}}</button>
+
   </article>
 
 </template>
@@ -35,7 +37,7 @@
       }
     },
     methods: {
-      ...mapActions(['requestEraseComment', 'editComment']),
+      ...mapActions(['requestEraseComment', 'editComment', 'toggleFav']),
       toggleEditing : function(){
         this.editing = !this.editing;
       }, 

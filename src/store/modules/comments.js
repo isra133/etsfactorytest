@@ -26,6 +26,12 @@ const commentsModule = {
 				resolve(true);
 				commit('saveCommentEdited', comment);
 			});
+		},
+		toggleFav : function({commit}, comment){
+			return new Promise((resolve, reject) => {
+				resolve(true);
+				commit('setToogleFav', comment);
+			});
 		}
 	},
 	mutations: {
@@ -63,6 +69,15 @@ const commentsModule = {
 
 			window.localStorage.setItem('comments', JSON.stringify(state.comments));
 			
+		},
+		setToogleFav(state, data){
+			state.comments.forEach(comment => {
+				if(comment.id == data.id && comment.date == data.date){
+					comment.fav = !comment.fav;
+				}
+			});
+
+			window.localStorage.setItem('comments', JSON.stringify(state.comments));
 		}
 	},
 
