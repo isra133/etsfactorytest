@@ -3,7 +3,10 @@
   <div class="wrapper -home">
 
 
-    
+    <section class="filters">
+      {{filterOptions}}
+
+    </section>
 
     <section class="symbol-list">
 
@@ -37,15 +40,38 @@
     computed : {
       ...mapGetters({
         symbols : 'getAllSymbols'
-      })
-    },
-    methods: {
-      ...mapActions(['requestAllSymbols'])
-    },
-    components: {
-      'symbol-el' : symbol_el
+      }), 
+      filterOptions : function(){
+
+       let filterOptions = {
+        'currency' : new Array(),
+        'risk_family' : new Array()
+      };
+
+      if(!!this.symbols){
+
+        this.symbols.forEach(symbol => {
+
+          for(let i in filterOptions){
+            (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
+          }
+
+        });
+
+
+
+      }
+
+      return filterOptions;
     }
+  },
+  methods: {
+    ...mapActions(['requestAllSymbols'])
+  },
+  components: {
+    'symbol-el' : symbol_el
   }
+}
 </script>
 
 <style scoped lang="scss">
