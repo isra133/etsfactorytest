@@ -4,7 +4,15 @@
 
 
     <section class="filters">
-      {{filterOptions}}
+
+      <template v-for="(filter, key) in filterOptions">
+
+          <select v-model="filters[filter]">
+              <option value="" selected="true">{{key | selectPlaceholder}}</option>
+              <option :value="option" v-for="option in filter">{{option}}</option>
+          </select>
+
+      </template>
 
     </section>
 
@@ -34,7 +42,7 @@
     },
     data() {
       return {
-
+        filters : []
       }
     },
     computed : {
@@ -44,25 +52,31 @@
       filterOptions : function(){
 
        let filterOptions = {
-        'currency' : new Array(),
-        'risk_family' : new Array()
-      };
+        'currency' : [],
+        'risk_family' : []
+        };
 
-      if(!!this.symbols){
+        if(!!this.symbols){
+          this.symbols.forEach(symbol => {
 
-        this.symbols.forEach(symbol => {
+            for(let i in filterOptions){
+              (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
+            }
 
-          for(let i in filterOptions){
-            (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
-          }
-
-        });
-
-
-
-      }
+          });
+        }
 
       return filterOptions;
+    }
+  },
+  filters : {
+    selectPlaceholder : function(value){
+      let strings = {
+        'currency' : 'Filtrar por divisa',
+        'risk_family' : 'Filtrar por familia de riesgo'
+      }; 
+
+      return strings[value];
     }
   },
   methods: {
