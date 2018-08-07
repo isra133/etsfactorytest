@@ -2,15 +2,14 @@
 
   <div class="wrapper -home">
 
-
-    <section class="filters">
+    <section class="filters" v-if="!!filterOptions">
 
       <template v-for="(filter, key) in filterOptions">
 
-          <select v-model="filters[filter]">
-              <option value="" selected="true">{{key | selectPlaceholder}}</option>
-              <option :value="option" v-for="option in filter">{{option}}</option>
-          </select>
+        <select v-model="filtersValues[key]" :name="key">
+          <option value="" selected="true">{{key | selectPlaceholder}}</option>
+          <option :value="option" v-for="option in filter">{{option}}</option>
+        </select>
 
       </template>
 
@@ -18,7 +17,7 @@
 
     <section class="symbol-list">
 
-      <template v-for="(symbol, key) in symbols">
+      <template v-for="(symbol, key) in symbolsFiltered">
         <symbol-el :data="symbol" :key="key"></symbol-el>
       </template>
 
@@ -42,7 +41,10 @@
     },
     data() {
       return {
-        filters : []
+        filtersValues : {
+          currency : '',
+          risk_family : '',
+        }
       }
     },
     computed : {
@@ -54,19 +56,41 @@
        let filterOptions = {
         'currency' : [],
         'risk_family' : []
-        };
+      };
 
-        if(!!this.symbols){
-          this.symbols.forEach(symbol => {
+      if(!!this.symbols){
 
-            for(let i in filterOptions){
-              (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
-            }
-
-          });
-        }
+        this.symbols.forEach(symbol => {
+          for(let i in filterOptions){
+            (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
+          }
+        });
+      }
 
       return filterOptions;
+    },
+    symbolsFiltered : function (){
+
+      if(!!this.symbols){
+
+        let symbols = this.symbols.slice();
+
+        symbols = symbols.filter(symbol => {
+
+          let can = true; 
+
+          for(let i in this.filtersValues){
+            (can && !!this.filtersValues[i]) ? can = (symbol[i] == this.filtersValues[i]) : '';
+          }
+
+          return can;
+
+        });
+
+        return symbols;
+
+      }
+
     }
   },
   filters : {
