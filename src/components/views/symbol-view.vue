@@ -20,8 +20,8 @@
       </p> -->
 
       <p class="risk-family" v-if="data.risk_family">
-          <a v-html="data.risk_family.name"></a>
-          <a v-html="data.risk_family.sub_family.name"></a>
+        <a v-html="data.risk_family.name"></a>
+        <a v-html="data.risk_family.sub_family.name"></a>
       </p>
 
       <!-- TODO SECTOR -->
@@ -31,7 +31,8 @@
 
     </template>
 
-      <comments-form :id="47868"></comments-form>
+    <comments-form :id="47868"></comments-form>
+    <comments-list :id="47868"></comments-list>
 
 
 
@@ -45,6 +46,7 @@
   import {mapActions} from 'vuex';
 
   import commentsForm from '@/components/parts/comments-form';
+  import commentsList from '@/components/parts/comments-list';
 
   export default  {
     name: 'symbol-view',
@@ -65,7 +67,8 @@
       ...mapActions(['requestSymbol'])
     },
     components : {
-      'comments-form' : commentsForm
+      'comments-form' : commentsForm,
+      'comments-list' : commentsList
     }
   }
 </script>
