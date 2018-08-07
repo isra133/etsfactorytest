@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import home from '@/components/views/home'
+import symbol_view from '@/components/views/symbol-view'
 
 
 Vue.use(Router)
@@ -14,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: home
+    },
+    {
+      path: '/activo/:id',
+      name: 'activo',
+      component: symbol_view
     }
   ]
 })
