@@ -14,14 +14,20 @@ Vue.use(Vuex)
 //VUE RESOURCE
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
-
- Vue.http.headers.common['Content-Type'] = 'application/json';
- Vue.http.headers.common['JsonStub-User-Key'] = '9facef2e-9583-4a83-9f08-c87159f1c113';
- Vue.http.headers.common['JsonStub-Project-Key'] = '6ed070c1-b334-4612-8fa8-169c5e45baef';
- Vue.http.options.root = store.getters.getServer;
-
-
+Vue.http.headers.common['Content-Type'] = 'application/json';
+Vue.http.headers.common['JsonStub-User-Key'] = '9facef2e-9583-4a83-9f08-c87159f1c113';
+Vue.http.headers.common['JsonStub-Project-Key'] = '6ed070c1-b334-4612-8fa8-169c5e45baef';
+Vue.http.options.root = store.getters.getServer;
 //.VUE RESOURCE
+
+
+//VEE VALIDATE
+import VeeValidate, {Validator} from 'vee-validate';
+import validatorEs from '@/validator/es';
+Validator.localize('es', validatorEs);
+Vue.use(VeeValidate);
+//.VEE-VALIDATE
+
 
 
 

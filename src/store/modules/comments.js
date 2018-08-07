@@ -6,7 +6,9 @@ const commentsModule = {
 
   },
   actions: {
+  	sendComment : function({commit}, text){
 
+  	}
   },
   getters: {
 
