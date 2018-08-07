@@ -8,13 +8,13 @@
 
 <script lang="js">
 
-  import axios from 'axios'
-  import VueAxios from 'vue-axios'
+  import {mapActions} from 'vuex';
 
   export default  {
     name: 'home',
     props: [],
     mounted() {
+      this.getAllSymbols();
     },
     data() {
       return {
@@ -22,7 +22,7 @@
       }
     },
     methods: {
-
+        ...mapActions(['getAllSymbols'])
     },
     computed: {
 

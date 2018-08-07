@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import store from './store/store'
 
 Vue.config.productionTip = false
 
@@ -11,17 +11,25 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 //.VUEX
 
+//VUE RESOURCE
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
 
-//AXIOS
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-axios.defaults.baseURL = store.state.apiserver;
-//.AXIOS
+ Vue.http.headers.common['Content-Type'] = 'application/json';
+ Vue.http.headers.common['JsonStub-User-Key'] = '9facef2e-9583-4a83-9f08-c87159f1c113';
+ Vue.http.headers.common['JsonStub-Project-Key'] = '6ed070c1-b334-4612-8fa8-169c5e45baef';
+ Vue.http.options.root = store.getters.getServer;
+
+
+//.VUE RESOURCE
+
+
 
 
 new Vue({
-  router,
-  store,
-  Vuex,
-  render: h => h(App)
+	router,
+	store,
+	VueResource,
+	Vuex,
+	render: h => h(App)
 }).$mount('#app')
