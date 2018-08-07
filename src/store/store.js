@@ -20,14 +20,6 @@ export default new Vuex.Store({
     getServer : state => state.apiserver,
     getLoad : state => state.load,
     getAllSymbols : state => state.symbols,
-    getSymbol(state) {
-      return (id) => {
-        if(!!state.symbols){
-          console.log(state.symbols);
-          return state.symbols.filter(symbol => symbol.id == id);
-        }
-      }
-    }
 
   },
   actions : {

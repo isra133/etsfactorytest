@@ -4,7 +4,7 @@
 
     <div class="input--container">
       <textarea v-model="text" v-validate="'required'" name="text"></textarea>
-      <span :class="['error']">{{ errors.first('text') }}</span>
+      <span :class="['error']" v-if="!!clicked">{{ errors.first('text') }}</span>
     </div>
 
       <button class="btn">Añadir</button>
@@ -40,6 +40,9 @@
     methods: {
       ...mapActions(['sendComment']),
       validateBeforeSubmit : function(){
+
+        this.clicked = true;
+
         this.$validator.validateAll().then(canSend => {
           if(canSend){
 
@@ -48,7 +51,12 @@
               id : this.id
             };
 
-            this.sendComment(data);
+            this.sendComment(data).then(response => {
+              if(response){
+                this.clicked = false;
+                this.text = '';
+              }
+            });
 
           }
         });
