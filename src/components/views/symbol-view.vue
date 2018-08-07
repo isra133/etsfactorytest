@@ -30,6 +30,9 @@
       <!-- TODO GRAFICO -->
 
 
+      <comments-form></comments-form>
+
+
 
     </template>
 
@@ -42,6 +45,8 @@
 <script lang="js">
 
   import {mapActions} from 'vuex';
+
+  import commentsForm from '@/components/parts/comments-form';
 
   export default  {
     name: 'symbol-view',
@@ -60,6 +65,9 @@
     },
     methods: {
       ...mapActions(['requestSymbol'])
+    },
+    components : {
+      'comments-form' : commentsForm
     }
   }
 </script>

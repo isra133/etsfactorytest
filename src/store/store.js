@@ -6,6 +6,9 @@ import VueResource from 'vue-resource'
 Vue.use(Vuex)
 Vue.use(VueResource);
 
+
+import commentsModule from '@/store/modules/comments';
+
 export default new Vuex.Store({
   state: {
   	apiserver : 'http://jsonstub.com/etsfintech/symbols',
@@ -55,5 +58,8 @@ export default new Vuex.Store({
     setLoaded (state, status){
       state.load = status;
     }
+  },
+  modules : {
+    commentsModule
   }
 })
