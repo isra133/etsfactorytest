@@ -9,24 +9,51 @@ Vue.use(VueResource);
 export default new Vuex.Store({
   state: {
   	apiserver : 'http://jsonstub.com/etsfintech/symbols',
+    load : false,
     symbols : ''
   },
   getters : {
+
     getServer : state => state.apiserver,
-    getAllSymbols : state => state.symbols
+    getLoad : state => state.load,
+    getAllSymbols : state => state.symbols,
+    getSymbol(state) {
+      return (id) => {
+        if(!!state.symbols){
+          console.log(state.symbols);
+          return state.symbols.filter(symbol => symbol.id == id);
+        }
+      }
+    }
+
   },
   actions : {
-   requestAllSymbols : ({commit}) => {
 
-    Vue.http.get('http://jsonstub.com/etsfintech/symbols').then(response => {
-      commit('setAllSymbols', response.body);
-    });
+    requestAllSymbols : ({commit}) => {
+      Vue.http.get('http://jsonstub.com/etsfintech/symbols').then(response => {
+        commit('setAllSymbols', response.body);
+        commit('setLoaded',true);
+      });
+    },
+    requestSymbol : ({commit}, id) => {
 
+      return new Promise((resolve, reject) => {
+
+        Vue.http.get(id).then(response => {
+          resolve(response.body);
+        });
+
+      });
+
+    }
+
+  },
+  mutations : {
+    setAllSymbols (state, symbols){
+      state.symbols = symbols;
+    },
+    setLoaded (state, status){
+      state.load = status;
+    }
   }
-},
-mutations : {
-  setAllSymbols (state, symbols){
-    state.symbols = symbols;
-  }
-}
 })

@@ -7,28 +7,32 @@
 </template>
 
 <script lang="js">
+
+  import {mapActions} from 'vuex';
+
   export default  {
     name: 'symbol-view',
     props: [],
     mounted() {
+      let that = this;
 
+      this.requestSymbol(this.$route.params.id).then(response => {
+        this.data = response;
+      });
     },
     data() {
       return {
-
+        data : ''
       }
     },
     methods: {
-
-    },
-    computed: {
-
+      ...mapActions(['requestSymbol'])
     }
-}
+  }
 </script>
 
 <style scoped lang="scss">
-  .symbol-view {
+.symbol-view {
 
-  }
+}
 </style>
