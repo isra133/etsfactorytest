@@ -13,6 +13,8 @@
 
       </template>
 
+      <input type="text" v-model="searchText">
+
     </section>
 
     <section class="symbol-list">
@@ -44,7 +46,8 @@
         filtersValues : {
           currency : '',
           risk_family : '',
-        }
+        }, 
+        searchText : ''
       }
     },
     computed : {
@@ -71,6 +74,8 @@
     },
     symbolsFiltered : function (){
 
+      let searchIn = ['name','risk_family','currency'];
+
       if(!!this.symbols){
 
         let symbols = this.symbols.slice();
@@ -81,6 +86,14 @@
 
           for(let i in this.filtersValues){
             (can && !!this.filtersValues[i]) ? can = (symbol[i] == this.filtersValues[i]) : '';
+          }
+
+          if(can && !!this.searchText){
+            searchIn.forEach(e =>{
+              if(can){
+                can = (symbol.name.toLowerCase().includes(this.searchText.toLowerCase()))
+              }
+            });
           }
 
           return can;
