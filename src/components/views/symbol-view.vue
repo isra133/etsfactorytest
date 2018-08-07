@@ -29,12 +29,10 @@
 
       <!-- TODO GRAFICO -->
 
-
-      <comments-form></comments-form>
-
-
-
     </template>
+
+      <comments-form :id="47868"></comments-form>
+
 
 
 

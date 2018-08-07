@@ -27,7 +27,7 @@
 
   export default  {
     name: 'comments-form',
-    props: [],
+    props: ['id'],
     mounted() {
 
     },
@@ -41,7 +41,16 @@
       ...mapActions(['sendComment']),
       validateBeforeSubmit : function(){
         this.$validator.validateAll().then(canSend => {
-          (canSend) ? this.sendComment(this.text) : '';
+          if(canSend){
+
+            let data = {
+              text : this.text,
+              id : this.id
+            };
+
+            this.sendComment(data);
+
+          }
         });
       }
     },
