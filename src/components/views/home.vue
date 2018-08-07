@@ -1,13 +1,19 @@
 <template lang="html">
 
-  <section class="home">
+  <div class="wrapper -home">
+
+
     
 
-    <template v-for="(symbol, key) in symbols">
-      <symbol-el :data="symbol" :key="key"></symbol-el>
-    </template>
+    <section class="symbol-list">
 
-  </section>
+      <template v-for="(symbol, key) in symbols">
+        <symbol-el :data="symbol" :key="key"></symbol-el>
+      </template>
+
+    </section>
+
+  </div>
 
 </template>
 

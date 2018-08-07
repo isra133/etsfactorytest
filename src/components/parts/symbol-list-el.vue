@@ -1,15 +1,20 @@
 <template lang="html">
 
-  <section class="symbol-list-el">
-    <h1>symbol-list-el Component</h1>
-  </section>
+ <article class="symbol">
+   
+    <h2>{{data.name}}</h2>
+    <h3>{{data.currency}}</h3>
+    <h4>{{data.risk_family}}</h4>
+    <router-link :to="`/activo/${data.id}`">Ver</router-link>
+
+ </article>
 
 </template>
 
 <script lang="js">
   export default  {
     name: 'symbol-list-el',
-    props: [],
+    props: ['data'],
     mounted() {
 
     },
