@@ -2,28 +2,59 @@
 
   <div class="wrapper -home">
 
-    <section class="filters" v-if="!!filterOptions">
+    <div class="container">
 
-      <template v-for="(filter, key) in filterOptions">
+      <h1 class="title">Tus activos</h1>
 
-        <select v-model="filtersValues[key]" :name="key">
-          <option value="" selected="true">{{key | selectPlaceholder}}</option>
-          <option :value="option" v-for="option in filter">{{option}}</option>
-        </select>
+      <section class="filters row-between" v-if="!!filterOptions">
 
-      </template>
+        <input type="text" v-model="searchText" class="input-text" placeholder="Escribe para buscar">
 
-      <input type="text" v-model="searchText">
 
-    </section>
+        <div class="filters-container">
 
-    <section class="symbol-list">
+          <template v-for="(filter, key) in filterOptions">
 
-      <template v-for="(symbol, key) in symbolsFiltered">
-        <symbol-el :data="symbol" :key="key"></symbol-el>
-      </template>
+            <select v-model="filtersValues[key]" :name="key">
+              <option value="" selected="true">{{key | selectPlaceholder}}</option>
+              <option :value="option" v-for="option in filter">{{option}}</option>
+            </select>
 
-    </section>
+          </template>
+
+        </div>
+
+
+      </section>
+
+      <section class="symbol-list row-start ais">
+
+        <header class="symbol-list-header row-start">
+          <h3 class="name">Nombre del activo</h3>
+          <h3 class="currency">Divisa</h3>
+          <h3 class="risk_family">Familia de riesgo</h3>
+        </header>
+
+        <template v-if="!!symbolsFiltered">
+
+          <template v-for="(symbol, key) in symbolsFiltered">
+            <symbol-el :data="symbol" :key="key"></symbol-el>
+          </template>
+
+          <div class="zero-results" v-if="symbolsFiltered.length == 0">
+            <h3>No hemos encontrado ningún activo con esas características</h3>
+            <button @click="eraseFiltersValues">Borrar filtros</button>
+          </div>
+
+        </template>
+
+        <template v-else>
+          <symbol-el-fake v-for="n in 16"></symbol-el-fake>
+        </template>
+
+      </section>
+
+    </div>
 
   </div>
 
@@ -34,12 +65,12 @@
   import {mapActions, mapGetters} from 'vuex';
 
   import symbol_el from '@/components/parts/symbol-list-el';
+  import symbol_el_fake from '@/components/parts/symbol-list-el-fake';
 
   export default  {
     name: 'home',
     props: [],
     mounted() {
-      this.requestAllSymbols();
     },
     data() {
       return {
@@ -117,16 +148,26 @@
     }
   },
   methods: {
-    ...mapActions(['requestAllSymbols'])
+    ...mapActions(['requestAllSymbols']),
+    eraseFiltersValues : function(){
+
+      this.searchText = '';
+      for(let i in this.filtersValues){
+        this.filtersValues[i] = '';
+      }
+
+    }
   },
   components: {
-    'symbol-el' : symbol_el
+    'symbol-el' : symbol_el,
+    'symbol-el-fake' : symbol_el_fake
   }
 }
 </script>
 
 <style scoped lang="scss">
-.home {
 
-}
+
+
+
 </style>
