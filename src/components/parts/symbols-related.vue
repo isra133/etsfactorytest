@@ -6,7 +6,7 @@
     <template v-if="!!symbols">
 
       <template v-for="(symbol, key) in symbols">
-        <symbol-el :data="symbol" :key="key"></symbol-el>
+        <symbol-el :data="symbol" :key="key" v-if="symbol.id != $route.params.id"></symbol-el>
       </template>
 
     </template>

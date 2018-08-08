@@ -2,57 +2,61 @@
 
   <div class="wrapper -home">
 
-    <div class="container">
+    <div class="container -big">
 
-      <h1 class="title">Tus activos</h1>
+      <div class="home-container">
 
-      <section class="filters row-between" v-if="!!filterOptions">
+        <h1 class="title">Tus activos</h1>
 
-        <input type="text" v-model="searchText" class="input-text" placeholder="Escribe para buscar">
+        <section class="filters row-between" v-if="!!filterOptions">
 
-
-        <div class="filters-container">
-
-          <template v-for="(filter, key) in filterOptions">
-
-            <select v-model="filtersValues[key]" :name="key">
-              <option value="" selected="true">{{key | selectPlaceholder}}</option>
-              <option :value="option" v-for="option in filter">{{option}}</option>
-            </select>
-
-          </template>
-
-        </div>
+          <input type="text" v-model="searchText" class="input-text" placeholder="Escribe para buscar">
 
 
-      </section>
+          <div class="filters-container">
 
-      <section class="symbol-list row-start ais">
+            <template v-for="(filter, key) in filterOptions">
 
-        <header class="symbol-list-header row-start">
-          <h3 class="name">Nombre del activo</h3>
-          <h3 class="currency">Divisa</h3>
-          <h3 class="risk_family">Familia de riesgo</h3>
-        </header>
+              <select v-model="filtersValues[key]" :name="key">
+                <option value="" selected="true">{{key | selectPlaceholder}}</option>
+                <option :value="option" v-for="option in filter">{{option}}</option>
+              </select>
 
-        <template v-if="!!symbolsFiltered">
+            </template>
 
-          <template v-for="(symbol, key) in symbolsFiltered">
-            <symbol-el :data="symbol" :key="key"></symbol-el>
-          </template>
-
-          <div class="zero-results" v-if="symbolsFiltered.length == 0">
-            <h3>No hemos encontrado ningún activo con esas características</h3>
-            <button @click="eraseFiltersValues">Borrar filtros</button>
           </div>
 
-        </template>
 
-        <template v-else>
-          <symbol-el-fake v-for="n in 16"></symbol-el-fake>
-        </template>
+        </section>
 
-      </section>
+        <section class="symbol-list row-start ais">
+
+          <header class="symbol-list-header row-start">
+            <h3 class="name">Nombre del activo</h3>
+            <h3 class="currency">Divisa</h3>
+            <h3 class="risk_family">Familia de riesgo</h3>
+          </header>
+
+          <template v-if="!!symbolsFiltered">
+
+            <template v-for="(symbol, key) in symbolsFiltered">
+              <symbol-el :data="symbol" :key="key"></symbol-el>
+            </template>
+
+            <div class="zero-results" v-if="symbolsFiltered.length == 0">
+              <h3>No hemos encontrado ningún activo con esas características</h3>
+              <button @click="eraseFiltersValues">Borrar filtros</button>
+            </div>
+
+          </template>
+
+          <template v-else>
+            <symbol-el-fake v-for="n in 16"></symbol-el-fake>
+          </template>
+
+        </section>
+
+      </div>
 
     </div>
 
@@ -165,7 +169,10 @@
 
 <style scoped lang="scss">
 
-
+  .home-container{
+    background: white;
+    padding: 40px;
+  }
 
 
 </style>
