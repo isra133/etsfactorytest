@@ -51,6 +51,33 @@
   margin-bottom: 20px;
 }
 
+.comment-list{
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0 10px;
+}
+
+.comment-list::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+  border-radius: 20px;
+}
+
+.comment-list::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #d0d0d0;
+  border-radius: 20px;
+}
+
+.comment-list::-webkit-scrollbar-thumb
+{
+  background-color: #d0d0d0;
+  border-radius: 20px;
+}
+
+
 .no-comments{
   width: 100%;
   text-align: center;

@@ -7,7 +7,7 @@
       <span :class="['error']" v-if="!!clicked">{{ errors.first('text') }}</span>
     </div>
 
-      <button class="btn">Añadir</button>
+      <button class="btn-action">Añadir</button>
 
 
   </form>
@@ -71,18 +71,19 @@
 <style scoped lang="scss">
 
 .comments-form{
-  padding: 0 20px;
   margin-top: 40px;
 }
 
 textarea{
   width: 100%;
   resize:none;
-  resize: vertical;
-  height: 40vh;
-  padding: 10px;
+  height: 30vh;
+  padding: 15px;
   outline: none;
-  border: 1px solid #efefef;
+  background:#f8f9fa;
+  border: 1px solid #ededed;
   font-size: 16px;
 }
+
+
 </style>

@@ -79,37 +79,37 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', end
 }
 
 .symbol-list-header{
-  width: 100%;
-  padding: 20px;
-  border-bottom: 3px solid #333;
+	width: 100%;
+	padding: 20px;
+	border-bottom: 3px solid #333;
 }
 
 .symbol-list-header h3{
-  font-weight: 300;
-  font-size: 14px;
-  color: #333;
-  text-transform: uppercase;
-  font-weight: 700;
+	font-weight: 300;
+	font-size: 14px;
+	color: #333;
+	text-transform: uppercase;
+	font-weight: 700;
 }
 
 .symbol-list-header .name{
-  width: 70%;
-  display: inline-block;
-  text-align: left;
+	width: 70%;
+	display: inline-block;
+	text-align: left;
 }
 
 .symbol-list-header .currency{
-  width: 10%;
-  display: inline-block;
-  color: #333;
-  text-align: center;
+	width: 10%;
+	display: inline-block;
+	color: #333;
+	text-align: center;
 }
 
 .symbol-list-header .risk_family{
-  width: 20%;
-  display: inline-block;
-  color: #333;
-  text-align: center;
+	width: 20%;
+	display: inline-block;
+	color: #333;
+	text-align: center;
 }
 
 .filters{
@@ -167,8 +167,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', end
 	cursor: pointer;
 }
 
+.btn-action{
+	text-decoration: underline;
+	background:none;
+	font-size: 13px;
+	border: none;
+	outline: none;
+	transition: .3;
+	cursor: pointer;
+}
+
 @keyframes loadAnimation { 
-  0%{background-position:0% 48%}
-  50%{background-position:100% 53%}
-  100%{background-position:0% 48%}
+	0%{background-position:0% 48%}
+	50%{background-position:100% 53%}
+	100%{background-position:0% 48%}
 }

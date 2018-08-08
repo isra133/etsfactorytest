@@ -1,19 +1,19 @@
 <template lang="html">
 
-  <article class="comment-el" :fav="data.fav">
+  <article class="comment-el" :fav="data.fav" :editing="editing">
 
     <p class="fecha">{{data.date | dateToString}}</p>
     <h2 v-if="!!!editing">{{data.text}}</h2>  
     <div v-else class="contenedor-input">
       <textarea v-model="text"></textarea>
-      <button @click="submitEdit">Guardar</button>
+      <button class="btn-action" @click="submitEdit">Guardar</button>
     </div>
 
-    <button @click="requestEraseComment(data)">Borrar</button>
+    <button class="btn-action borrar" v-show="!!!editing" @click="requestEraseComment(data)">Borrar</button>
 
-    <button @click="toggleEditing">Editar</button>
+    <button class="btn-action editar" v-show="!!!editing" @click="toggleEditing">Editar</button>
 
-    <button class="favorito" :fav="data.fav" @click="toggleFav(data)">Marcar como favorito</button>
+    <button class="favorito" v-show="!!!editing" :fav="data.fav" @click="toggleFav(data)">Marcar como favorito</button>
 
   </article>
 
@@ -66,16 +66,14 @@
 .comment-el {
   border-bottom: 1px solid #efefef;
   width: 100%;
-  padding: 20px;
+  padding:20px 10px;
   text-align: left;
   position: relative;
+  transition: .3s;
 }
+
 .comment-el[fav="true"]{
-  -webkit-order: -1;
-  -moz-order: -1;
-  -ms-order: -1;
-  -o-order: -1;
-  order: -1;
+  border-bottom:1px solid #333;
 }
 
 .fecha{
@@ -86,8 +84,13 @@
 }
 
 
+
 h2{
   line-height: 30px;
+  font-size: 16px;
+}
+
+[fav="true"] h2{
   font-size: 20px;
 }
 
@@ -100,6 +103,8 @@ h2{
   display: inline-block;
   outline: none;
 }
+
+
 
 .favorito{
   width: 100px;
@@ -120,14 +125,33 @@ h2{
   font-size: 0;
 }
 
-.comment-el:hover .favorito{
-  opacity: 1;
-}
 
 .favorito[fav="true"]{
   transition-duration: 1s;
   background-position: -2800px 0;
   opacity: 1;
 }
+
+.borrar{
+ position: absolute;
+ right: 20px;
+ bottom: 20px;
+ color: #eb0000;
+ transition: .3s;
+ opacity: 0;
+ pointer-events: none;
+ cursor: pointer;
+ z-index: 2;
+}
+
+.comment-el:hover .borrar{
+  opacity: 1;
+  pointer-events: visible;
+}
+
+
+
+
+
 
 </style>

@@ -5,7 +5,10 @@
 
     <template v-if="!!data">
 
+      <router-link to="/" class="btn-action volver">< Volver</router-link>
+
       <div class="container -big row-between ais">
+
 
         <section class="info-container">
 
@@ -77,7 +80,7 @@
 
 
 
-</section>
+  </section>
 
 </template>
 
@@ -117,6 +120,14 @@
 </script>
 
 <style scoped lang="scss">
+
+.volver{
+  width: 100%;
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 20px;
+  max-width: 1280px;
+}
 
 .info-container{
   width: 100%;
