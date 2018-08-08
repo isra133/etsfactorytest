@@ -1,8 +1,8 @@
 <template lang="html">
 
   <section class="comments-view">
-    <comments-list></comments-list>
-    <comments-form></comments-form>
+    <comments-list :id="$route.params.id"></comments-list>
+    <comments-form :id="$route.params.id"></comments-form>
   </section>
 
 </template>
