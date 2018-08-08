@@ -43,6 +43,7 @@ Vue.use(VueChartkick, {adapter: Chart})
 
 <style scoped lang="scss">
 .chart-visualizer {
-
+  position: relative;
+  width: 100%;
 }
 </style>

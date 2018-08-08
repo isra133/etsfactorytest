@@ -5,64 +5,75 @@
 
     <template v-if="!!data">
 
-      <div class="container -big">
+      <div class="container -big row-between ais">
 
-        <div class="data-container" v-if="!!data.name">
-          <span class="assistant">Nombre</span>
-          <h1 v-html="data.name"></h1>
-        </div>
+        <section class="info-container">
 
+          <h2 class="title">Datos del activo</h2>
 
-        <div class="data-container" v-if="!!data.currency">
-          <span class="assistant">Divisa</span>
-          <h2 v-html="data.currency.name"></h2>
-        </div>
+          <div class="data-container" v-if="!!data.name">
+            <span class="assistant">Nombre</span>
+            <h1 v-html="data.name"></h1>
+          </div>
 
 
-        <div class="data-container" v-if="!!data.issuer">
-          <span class="assistant">Emisor</span>
-          <h2 v-html="data.issuer.name"></h2>
-        </div>
-
-        <div class="data-container" v-if="!!data.isin">
-          <span class="assistant">ISIN</span>
-          <h2 v-html="data.isin"></h2>
-        </div>
+          <div class="data-container" v-if="!!data.currency">
+            <span class="assistant">Divisa</span>
+            <h2 v-html="data.currency.name"></h2>
+          </div>
 
 
-        <div class="data-container">
-          <span class="assistant">Familia de riesgo</span>
-          <p class="breadcrumb row-start" v-if="data.risk_family">
-            <h2 v-html="data.risk_family.name"></h2>
-            <h2 v-html="data.risk_family.sub_family.name"></h2>
-          </p>
-        </div>
-        
+          <div class="data-container" v-if="!!data.issuer">
+            <span class="assistant">Emisor</span>
+            <h2 v-html="data.issuer.name"></h2>
+          </div>
+
+          <div class="data-container" v-if="!!data.isin">
+            <span class="assistant">ISIN</span>
+            <h2 v-html="data.isin"></h2>
+          </div>
+
+
+          <div class="data-container" v-if="data.region">
+            <span class="assistant">Región</span>
+            <div class="breadcrumb row-start">
+              <h2 v-html="data.region.name"></h2>
+              <h2 v-if="data.region.region_level2" v-html="data.region.region_level2.name"></h2>
+              <h2 v-if="data.region.region_level2.region_level3" v-html="data.region.region_level2.region_level3.name"></h2>
+            </div>
+          </div>
+
+
+          <div class="data-container" v-if="data.sector">
+            <span class="assistant">Sector</span>
+            <div class="breadcrumb row-start">
+              <h2 v-html="data.sector.name"></h2>
+              <h2 v-if="data.sector.sector_level2" v-html="data.sector.sector_level2.name"></h2>
+            </div>
+          </div>
+
+
+          <div class="data-container" v-if="data.risk_family">
+            <span class="assistant">Familia de riesgo</span>
+            <div class="breadcrumb row-start">
+              <h2 v-html="data.risk_family.name"></h2>
+              <h2 v-html="data.risk_family.sub_family.name"></h2>
+            </div>
+          </div>
+
+
+          <div class="chart-container">
+            <h2 class="title">Gráfica de precios</h2>
+            <chart :datasets="data.prices" v-if="!!data"></chart>
+          </div>
+
+        </section>
+
+        <comments-view></comments-view>
 
       </div>
 
-
-   <!--    <p class="region" v-if="!!data.region">
-        
-        <span v-if="!!data.region.name" v-html="data.region.name"></span>
-        <span v-if="!!data.region.region_level2" v-html="data.region.region_level2.name"></span>
-        <span v-if="!!data.region.region_level3" v-html="data.region.name"></span>
-
-      </p> -->
-
-
-
-      <!-- TODO SECTOR -->
-
-
-      <!-- TODO GRAFICO -->
-      <chart :datasets="data.prices" v-if="!!data"></chart>
-
     </template>
-
-    <!-- <comments-form :id="47868"></comments-form>
-    <comments-list :id="47868"></comments-list>
-  -->
 
 
 
@@ -74,9 +85,10 @@
 
   import {mapActions} from 'vuex';
 
-  import commentsForm from '@/components/parts/comments-form';
-  import commentsList from '@/components/parts/comments-list';
+  
+
   import chart from '@/components/parts/chart-visualizer';
+  import comments from '@/components/parts/comments-view';
 
   export default  {
     name: 'symbol-view',
@@ -97,24 +109,36 @@
       ...mapActions(['requestSymbol'])
     },
     components : {
-      'comments-form' : commentsForm,
-      'comments-list' : commentsList,
-      'chart' : chart
+
+      'chart' : chart,
+      'comments-view' : comments
     }
   }
 </script>
 
 <style scoped lang="scss">
+
+.info-container{
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  padding: 40px 40px;
+}
+
+.title{
+  font-size: 30px;
+}
+
+.data-container{
+  margin-bottom: 30px;
+}
+
 .assistant{
   width: 100%;
   text-align: left;
   display: inline-block;
-  font-size: 12px;
+  font-size: 13px;
   color: #333;
-}
-
-.data-container{
-  margin-bottom: 40px;
 }
 
 .data-container h1{
@@ -137,12 +161,27 @@
 
 .breadcrumb h2{
   width: auto;
+  margin-right: 5px;
 }
 
-.breadcrumb h2::before{
+.breadcrumb h2::after{
   content: '/';
+  margin-left: 5px;
   display: inline-block;
-  
+  opacity: .8;
 }
+
+.breadcrumb h2:last-of-type{
+  margin-right: 0;
+}
+
+.breadcrumb h2:last-of-type::after{
+  content: none;
+}
+
+.chart-container{
+  margin-top: 80px;
+}
+
 
 </style>

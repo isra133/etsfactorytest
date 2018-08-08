@@ -3,7 +3,7 @@
   <form class="comments-form" @submit.prevent="validateBeforeSubmit">
 
     <div class="input--container">
-      <textarea v-model="text" v-validate="'required'" name="text"></textarea>
+      <textarea v-model="text" v-validate="'required'" name="text" placeholder="Escribe aquí tus notas"></textarea>
       <span :class="['error']" v-if="!!clicked">{{ errors.first('text') }}</span>
     </div>
 
@@ -69,7 +69,20 @@
 </script>
 
 <style scoped lang="scss">
-.comments-form {
 
+.comments-form{
+  padding: 0 20px;
+  margin-top: 40px;
+}
+
+textarea{
+  width: 100%;
+  resize:none;
+  resize: vertical;
+  height: 40vh;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #efefef;
+  font-size: 16px;
 }
 </style>
