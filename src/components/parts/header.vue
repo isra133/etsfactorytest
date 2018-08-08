@@ -34,7 +34,7 @@
 
 <style scoped lang="scss">
   header{
-    width: 1000%;
+    width: 100%;
     height: 75px;
     background: white;
     padding: 0 20px;
