@@ -21,5 +21,12 @@ export default new Router({
       name: 'activo',
       component: symbol_view
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if(savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
 })

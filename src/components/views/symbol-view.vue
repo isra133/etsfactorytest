@@ -5,9 +5,10 @@
 
     <template v-if="!!data">
 
-      <router-link to="/" class="btn-action volver">< Volver</router-link>
 
       <div class="container -big row-between ais">
+
+      <router-link to="/" class="btn-action volver">< Volver</router-link>
 
         <section class="info-container">
 
@@ -79,6 +80,12 @@
 
     </template>
 
+    <template v-if="!!!data">
+      
+      <fake-symbol-view></fake-symbol-view>
+
+    </template>
+
 
 
   </section>
@@ -89,7 +96,7 @@
 
   import {mapActions} from 'vuex';
 
-  
+  import fake_symbol_view from '@/components/parts/fake-symbol-view'
 
   import chart from '@/components/parts/chart-visualizer';
   import comments from '@/components/parts/comments-view';
@@ -117,19 +124,16 @@
     components : {
       'symbols-related' : symbols_related,
       'chart' : chart,
-      'comments-view' : comments
+      'comments-view' : comments,
+      'fake-symbol-view' : fake_symbol_view
     }
   }
 </script>
 
 <style scoped lang="scss">
 
-.volver{
-  width: 100%;
-  text-align: left;
-  display: inline-block;
-  margin-bottom: 20px;
-  max-width: 1280px;
+.container{
+  position: relative;
 }
 
 .info-container{

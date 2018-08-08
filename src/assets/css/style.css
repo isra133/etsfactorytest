@@ -177,6 +177,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', end
 	cursor: pointer;
 }
 
+.volver{
+  width: 100%;
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 20px;
+  max-width: 1280px;
+  position: absolute;
+  top: -30px;
+  left: 0;
+}
+
 @keyframes loadAnimation { 
 	0%{background-position:0% 48%}
 	50%{background-position:100% 53%}
