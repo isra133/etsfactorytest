@@ -36,7 +36,7 @@
 <style scoped lang="scss">
 .comments-view {
   width: 100%;
-  max-width: 300px;
+  max-width: 330px;
   background: white;
   padding: 40px 20px;
 }

@@ -148,9 +148,7 @@
     }
   },
   methods: {
-    ...mapActions(['requestAllSymbols']),
     eraseFiltersValues : function(){
-
       this.searchText = '';
       for(let i in this.filtersValues){
         this.filtersValues[i] = '';

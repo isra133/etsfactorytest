@@ -9,7 +9,6 @@
 
       <div class="container -big row-between ais">
 
-
         <section class="info-container">
 
           <h2 class="title">Datos del activo</h2>
@@ -76,6 +75,8 @@
 
       </div>
 
+      <symbols-related></symbols-related>
+
     </template>
 
 
@@ -92,6 +93,8 @@
 
   import chart from '@/components/parts/chart-visualizer';
   import comments from '@/components/parts/comments-view';
+
+  import symbols_related from '@/components/parts/symbols-related'
 
   export default  {
     name: 'symbol-view',
@@ -112,7 +115,7 @@
       ...mapActions(['requestSymbol'])
     },
     components : {
-
+      'symbols-related' : symbols_related,
       'chart' : chart,
       'comments-view' : comments
     }
