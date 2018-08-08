@@ -33,6 +33,7 @@
 
           <header class="symbol-list-header row-start">
             <h3 class="name">Nombre del activo</h3>
+            <h3 class="comments">Comentarios</h3>
             <h3 class="currency">Divisa</h3>
             <h3 class="risk_family">Familia de riesgo</h3>
           </header>
