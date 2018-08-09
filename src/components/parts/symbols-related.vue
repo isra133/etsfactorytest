@@ -3,17 +3,21 @@
   <section class="container -big symbols-related">
     <h2 class="title">Otros activos</h2>
 
-    <template v-if="!!symbols">
+    <div class="row-start ais">
 
-      <template v-for="(symbol, key) in symbols">
-        <symbol-el :data="symbol" :key="key" v-if="symbol.id != $route.params.id"></symbol-el>
+      <template v-if="!!symbols">
+
+        <template v-for="(symbol, key) in symbols">
+          <symbol-el :data="symbol" :key="key" v-if="symbol.id != $route.params.id"></symbol-el>
+        </template>
+
       </template>
 
-    </template>
+      <template v-else>
+        <symbol-el-fake v-for="n in 16"></symbol-el-fake>
+      </template>
 
-    <template v-else>
-      <symbol-el-fake v-for="n in 16"></symbol-el-fake>
-    </template>
+    </div>
 
 
   </section>
@@ -58,8 +62,29 @@
   padding: 40px;
 }
 
+@media screen and (max-width: 1023px){
+  .symbol{
+    margin-right:0;
+  }
+
+  .symbol:nth-child(2n-1){
+    margin-right: 20px;
+  }
+}
+
 .title{
   font-size: 30px;
 }
 
+@media screen and (max-width: 1220px){
+  .title{
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 767px){
+.symbol:nth-child(2n-1){
+  margin-right: 0;
+}
+}
 </style>

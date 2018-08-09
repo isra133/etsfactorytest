@@ -89,4 +89,18 @@
   max-width: 200px;
 }
 
+@media screen and (max-width: 970px){
+  .title{
+    text-align: left;
+    font-size: 24px;
+  }
+
+  .no-comments{
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .comment-list{max-height: initial;overflow: inherit;}
+}
+
 </style>

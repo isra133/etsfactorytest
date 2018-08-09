@@ -40,4 +40,14 @@
   background: white;
   padding: 40px 20px;
 }
+
+@media screen and (max-width:970px){
+
+  .comments-view{
+    max-width: 100%;
+  }
+
+}
+
+
 </style>

@@ -150,7 +150,12 @@ h2{
 }
 
 
-
+@media screen and (max-width:1024px){
+  .borrar{
+    opacity: 1;
+    pointer-events: visible;
+  }
+}
 
 
 

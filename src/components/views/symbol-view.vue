@@ -202,5 +202,47 @@
   margin-top: 80px;
 }
 
+@media screen and (max-width: 1400px){
+  .info-container{
+    max-width: 768px;
+  }
+}
+
+@media screen and (max-width: 1220px){
+  .info-container{
+    max-width: 568px;
+  }
+  
+  .info-container .title{
+    font-size: 24px;
+  }
+
+  .data-container{
+    margin-bottom: 15px;
+  }
+
+  .data-container h1{
+    font-size: 20px;
+  }
+
+  .data-container h2{
+    font-size: 18px;
+  }
+
+  .chart-container{
+    margin-top: 40px;
+  }
+
+}
+
+@media screen and (max-width:970px){
+
+  .info-container{
+    padding: 20px;
+    max-width: 100%;
+  }
+
+}
+
 
 </style>
