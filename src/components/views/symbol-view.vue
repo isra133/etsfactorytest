@@ -8,7 +8,7 @@
 
       <div class="container -big row-between ais">
 
-      <router-link to="/" class="btn-action volver">< Volver</router-link>
+        <router-link to="/" class="btn-action volver">< Volver</router-link>
 
         <section class="info-container">
 
@@ -81,7 +81,7 @@
     </template>
 
     <template v-if="!!!data">
-      
+
       <fake-symbol-view></fake-symbol-view>
 
     </template>
@@ -126,6 +126,15 @@
       'chart' : chart,
       'comments-view' : comments,
       'fake-symbol-view' : fake_symbol_view
+    },
+    watch : {
+      '$route' : function(){
+        this.data = '';
+        this.requestSymbol(this.$route.params.id).then(response => {
+          this.data = response;
+        });
+      }
+
     }
   }
 </script>
