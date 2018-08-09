@@ -20,12 +20,10 @@
 
 
             <div class="options-container" :open="showMoreFilters">
-
-              <button :active="filterParams.searchIn.includes('name')" @click="toggleSearchIn('name')">Nombre</button>
               
               <template v-for="(option, key) in filterOptions">
 
-                <button :active="filterParams.searchIn.includes(key)" @click="toggleSearchIn(key)">{{key | nameOfCategory}}</button>
+                <button :active="filterParams.searchIn.includes(option)" @click="toggleSearchIn(option)">{{option | nameOfCategory}}</button>
 
               </template>
 
@@ -82,13 +80,14 @@
     name: 'home',
     props: [],
     mounted() {
+      this.filterParams.searchIn = this.filterOptions.slice();
     },
     data() {
       return {
         showMoreFilters : false,
         filterParams : {
           searchText : '',
-          searchIn : ['name','risk_family']
+          searchIn : ''
         },
       }
     },
@@ -106,6 +105,7 @@
      filters : {
     nameOfCategory : function(value){
       let strings = {
+        'name' : 'Filtrar por nombre',
         'currency' : 'Filtrar por divisa',
         'risk_family' : 'Filtrar por familia de riesgo'
       }; 

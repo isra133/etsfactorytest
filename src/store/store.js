@@ -19,24 +19,10 @@ export default new Vuex.Store({
     getServer : state => state.apiserver,
     getAllSymbols : state => state.symbols,
     getCategoriesToFilter : state => {
-
-     let filterOptions = {
-      'currency' : [],
-      'risk_family' : []
-    };
-
-    if(!!state.symbols){
-
-      state.symbols.forEach(symbol => {
-        for(let i in filterOptions){
-          (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
-        }
-      });
-    }
-
-    return filterOptions;
-  },
-  getSymbolsfiltered(state) {
+     let categories = ['name', 'currency', 'risk_family'];
+     return categories;
+   },
+   getSymbolsfiltered(state) {
     return (params) => {
 
       let symbols = new Array();
