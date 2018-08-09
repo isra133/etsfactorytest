@@ -12,7 +12,12 @@
 
     </nav>
 
-    <line-chart :data="data"></line-chart>
+    <div class="chart-container">
+      <div class="scroller">
+        <line-chart :data="data"></line-chart>
+      </div>
+    </div>
+
     
     <p v-if="data.length == 0" class="no-results">No hay resultados en ese periodo de tiempo</p>
 
@@ -125,6 +130,25 @@
   position: absolute;
   text-align: center;
   display: inline-block;
+}
+
+@media screen and (max-width: 768px){
+  .btn-action{
+    margin-bottom: 5px;
+  }
+  
+  .chart-container{
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .no-results{
+    max-width: 50vw;
+    font-size: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
 }
 
 </style>

@@ -82,6 +82,12 @@
   }
 }
 
+@media screen and (max-width: 970px){
+  .symbols-related{
+    padding: 20px;
+  }
+}
+
 @media screen and (max-width: 767px){
 .symbol:nth-child(2n-1){
   margin-right: 0;
