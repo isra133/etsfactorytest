@@ -5,7 +5,6 @@
   <div class="text-container row-between">
     <span class="assistant">Nombre</span>
     <h2 class="title-list">{{data.name}}</h2>
-    <span class="assistant">Comentarios</span>
     <h3 class="comments" v-html="comments(data.id).length"></h3>
     <span class="assistant">Divisa</span>
     <h3 class="currency">{{data.currency}}</h3>
@@ -21,7 +20,7 @@
 </template>
 
 <script lang="js">
-  
+
   import {mapGetters} from 'vuex'
 
   export default  {
@@ -133,14 +132,57 @@
 }
 
 @media screen and (max-width: 1023px){
-  .assistant{
-    width: 100%;
-    display: inline-block;
-    text-align: left;
-    font-size: 12px;
-  }
   .title-list{
     width: 100%;
+    margin-bottom: 10px;
+    white-space: initial;
+  }
+
+  .family-risk{
+    width: 100%;
+    text-align: left;
+  }
+
+  .currency{
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+
+  }
+  
+  .symbol{
+    width: calc(50% - 10px);
+    border: 1px solid #efefef;
+    padding-right: 40px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+
+  .symbol:hover{
+    box-shadow: none;
+  }
+
+  .symbol:nth-child(2n-1){
+    margin-right: 0;
+  }
+
+  .assistant{
+    display: inline-block;
+  }
+  
+  .comments{
+    position: absolute;
+    right: 20px;
+    bottom:20px;
+    font-size: 18px;
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .symbol{
+    width: 100%;
+    margin-right: 0;
   }
 }
 

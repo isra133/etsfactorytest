@@ -124,18 +124,15 @@ body{font-weight:400;text-align:center;font-size: 16px;background: #f8f9fa}
 }
 
 .filters .options-container{
-	position: absolute;
-	left: 0px;
-	top: 0;
 	height: 40px;
 	line-height: 40px;
 	will-change:transform;
 	transition: .5s;
-	transform: translateX(-100%);
+	transform: translateX(-120%);
 }
 
 .filters .options-container[open="open"]{
-	transform: translateX(calc(100% + 10px));
+	transform: translateX(0);
 }
 
 .filters .options-container button{
@@ -213,6 +210,7 @@ body{font-weight:400;text-align:center;font-size: 16px;background: #f8f9fa}
 	background: #fff url(/img/search.svg) 110% center/25px no-repeat;
 	transition: .3s;
 	z-index: 2;
+	border-radius: 0;
 }
 
 .input-text::-webkit-input-placeholder{color:#d0d0d0;}
@@ -272,6 +270,14 @@ body{font-weight:400;text-align:center;font-size: 16px;background: #f8f9fa}
   left: 0;
 }
 
+.assistant{
+  width: 100%;
+  text-align: left;
+  display: inline-block;
+  font-size: 13px;
+  color: #333;
+}
+
 @keyframes loadAnimation { 
 	0%{background-position:0% 48%}
 	50%{background-position:100% 53%}
@@ -279,8 +285,20 @@ body{font-weight:400;text-align:center;font-size: 16px;background: #f8f9fa}
 }
 
 @media screen and (max-width: 1023px){
+
+.wrapper{
+	padding: 20px;
+}
+
   .symbol-list-header{
   	display: none;
 
   }
+}
+
+@media screen and (max-width: 980px){
+	.filters .options-container{
+		width: 100%;
+		margin-top: 10px;
+	}
 }

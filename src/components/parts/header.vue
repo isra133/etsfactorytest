@@ -47,4 +47,11 @@
     background: #efefef;
     margin-left: 20px;
   }
+
+  @media screen and (max-width: 600px){
+    nav a:last-of-type,
+    nav a:nth-child(3){
+      display: none;
+    }
+  }
 </style>

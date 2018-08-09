@@ -160,14 +160,6 @@
   margin-bottom: 30px;
 }
 
-.assistant{
-  width: 100%;
-  text-align: left;
-  display: inline-block;
-  font-size: 13px;
-  color: #333;
-}
-
 .data-container h1{
   text-align: left;
   width: 100%;

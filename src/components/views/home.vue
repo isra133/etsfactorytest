@@ -103,6 +103,16 @@
         return string;
       },
     },
+     filters : {
+    nameOfCategory : function(value){
+      let strings = {
+        'currency' : 'Filtrar por divisa',
+        'risk_family' : 'Filtrar por familia de riesgo'
+      }; 
+
+      return strings[value];
+    }
+  },
     methods: {
       eraseFiltersValues : function(){
         this.filterParams.searchText = '';
@@ -134,6 +144,12 @@
 .home-container{
   background: white;
   padding: 40px;
+}
+
+@media screen and (max-width: 1023px){
+  .home-container{
+    padding: 20px;
+  }
 }
 
 
