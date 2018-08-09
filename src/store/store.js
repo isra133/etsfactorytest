@@ -12,26 +12,42 @@ import commentsModule from '@/store/modules/comments';
 export default new Vuex.Store({
   state: {
   	apiserver : 'http://jsonstub.com/etsfintech/symbols',
-    load : false,
     symbols : '',
   },
   getters : {
 
     getServer : state => state.apiserver,
-    getLoad : state => state.load,
     getAllSymbols : state => state.symbols,
-    getSymbolsfiltered(state) {
-      return (params) => {
+    getCategoriesToFilter : state => {
 
-        let searchIn = ['name', 'currency', 'risk_family'];
+     let filterOptions = {
+      'currency' : [],
+      'risk_family' : []
+    };
 
-        let symbols = new Array();
+    if(!!state.symbols){
 
-        if(!!state.symbols){
+      state.symbols.forEach(symbol => {
+        for(let i in filterOptions){
+          (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
+        }
+      });
+    }
+
+    return filterOptions;
+  },
+  getSymbolsfiltered(state) {
+    return (params) => {
+
+      let symbols = new Array();
+
+      if(!!state.symbols){
+
+        if(params.searchIn.length != 0){
 
           state.symbols.forEach(symbol => {
 
-            searchIn.forEach(s => {
+            params.searchIn.forEach(s => {
 
               if(symbol[s].toLowerCase().includes(params.searchText.toLowerCase()) && !symbols.some(s => s.id == symbol.id)){
                 symbols.push(symbol);
@@ -41,44 +57,48 @@ export default new Vuex.Store({
 
           });
 
+        }else{
+
+          symbols = state.symbols;
+          
         }
 
+        
 
-        return symbols;
       }
-    }
 
-  },
-  actions : {
-
-    requestAllSymbols : ({commit}) => {
-      Vue.http.get('http://jsonstub.com/etsfintech/symbols').then(response => {
-        commit('setAllSymbols', response.body);
-        commit('setLoaded',true);
-      });
-    },
-    requestSymbol : ({commit}, id) => {
-
-      return new Promise((resolve, reject) => {
-
-        Vue.http.get(id).then(response => {
-          resolve(response.body);
-        });
-
-      });
+      return symbols;
 
     }
-
-  },
-  mutations : {
-    setAllSymbols (state, symbols){
-      state.symbols = symbols;
-    },
-    setLoaded (state, status){
-      state.load = status;
-    }
-  },
-  modules : {
-    commentsModule
   }
+
+},
+actions : {
+
+  requestAllSymbols : ({commit}) => {
+    Vue.http.get('http://jsonstub.com/etsfintech/symbols').then(response => {
+      commit('setAllSymbols', response.body);
+    });
+  },
+  requestSymbol : ({commit}, id) => {
+
+    return new Promise((resolve, reject) => {
+
+      Vue.http.get(id).then(response => {
+        resolve(response.body);
+      });
+
+    });
+
+  }
+
+},
+mutations : {
+  setAllSymbols (state, symbols){
+    state.symbols = symbols;
+  }
+},
+modules : {
+  commentsModule
+}
 })

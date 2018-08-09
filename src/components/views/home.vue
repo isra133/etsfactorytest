@@ -10,21 +10,28 @@
 
         <section class="filters row-between" v-if="!!filterOptions">
 
-          <input type="text" v-model="filterParams.searchText" class="input-text" placeholder="Escribe para buscar">
+          <div class="input-text--container row-start">
 
-          <div class="filters-container">
+            <input type="text" v-model="filterParams.searchText" class="input-text" placeholder="Escribe para buscar en la tabla...">
 
-            <template v-for="(filter, key) in filterOptions">
+            <button class="show-filters" :open="showMoreFilters" @click="showMoreFilters = !showMoreFilters"></button>
 
-              <select v-model="filtersValues[key]" :name="key">
-                <option value="" selected="true">{{key | selectPlaceholder}}</option>
-                <option :value="option" v-for="option in filter">{{option}}</option>
-              </select>
+            <p class="results" v-if="!!filterParams.searchText">Se han encontrado {{symbolsFiltered(filterParams).length}} {{results_string}}  <button class="btn-action" @click="eraseFiltersValues">Borrar</button></p>
 
-            </template>
+
+            <div class="options-container" :open="showMoreFilters">
+
+              <button :active="filterParams.searchIn.includes('name')" @click="toggleSearchIn('name')">Nombre</button>
+              
+              <template v-for="(option, key) in filterOptions">
+
+                <button :active="filterParams.searchIn.includes(key)" @click="toggleSearchIn(key)">{{key | nameOfCategory}}</button>
+
+              </template>
+
+            </div>
 
           </div>
-
 
         </section>
 
@@ -53,14 +60,14 @@
           <template v-else>
             <symbol-el-fake v-for="n in 16"></symbol-el-fake>
           </template>
-       
-      </section>
+
+        </section>
+
+      </div>
 
     </div>
 
   </div>
-
-</div>
 
 </template>
 
@@ -78,59 +85,44 @@
     },
     data() {
       return {
+        showMoreFilters : false,
         filterParams : {
-          searchText : ''
+          searchText : '',
+          searchIn : ['name','risk_family']
         },
-        filtersValues : {
-          currency : '',
-          risk_family : '',
-        } 
       }
     },
     computed : {
       ...mapGetters({
         symbols : 'getAllSymbols',
-        symbolsFiltered : 'getSymbolsfiltered'
+        symbolsFiltered : 'getSymbolsfiltered',
+        filterOptions : 'getCategoriesToFilter'
       }), 
-      filterOptions : function(){
-
-       let filterOptions = {
-        'currency' : [],
-        'risk_family' : []
-      };
-
-      if(!!this.symbols){
-
-        this.symbols.forEach(symbol => {
-          for(let i in filterOptions){
-            (!filterOptions[i].some(filter => filter == symbol[i])) ? filterOptions[i].push(symbol[i]) : '';
-          }
-        });
-      }
-
-      return filterOptions;
-    }
-  },
-  filters : {
-    selectPlaceholder : function(value){
-      let strings = {
-        'currency' : 'Filtrar por divisa',
-        'risk_family' : 'Filtrar por familia de riesgo'
-      }; 
-
-      return strings[value];
-    }
-  },
-  methods: {
-    eraseFiltersValues : function(){
-      this.filterParams.searchText = '';
-      for(let i in this.filtersValues){
-        this.filtersValues[i] = '';
-      }
-
-    }
-  },
-  components: {
+      results_string : function(){
+        let string = (this.symbolsFiltered(this.filterParams).length == 1) ? 'coincidencia' : 'coincidencias';
+        return string;
+      },
+    },
+    methods: {
+      eraseFiltersValues : function(){
+        this.filterParams.searchText = '';
+        for(let i in this.filtersValues){
+          this.filtersValues[i] = '';
+        }
+      },
+      toggleSearchIn : function(value){
+        if(this.filterParams.searchIn.includes(value)){
+          this.filterParams.searchIn.splice(this.filterParams.searchIn.indexOf(value), 1);
+        }else{
+          this.filterParams.searchIn.push(value);
+        }  
+      },
+      searchInActive : function(value){
+       let flag = (this.filterParams.searchIn.some(s => s == value)) ? true : false;
+       return flag;
+     }
+   },
+   components: {
     'symbol-el' : symbol_el,
     'symbol-el-fake' : symbol_el_fake,
   }

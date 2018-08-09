@@ -35,15 +35,6 @@ body{font-weight:400;text-align:center;font-size: 16px;background: #f8f9fa}
 /*Gray #efefef*/
 /*Gray middle #d0d0d0*/
 
-/**GREEN GRADIENT*/
-/*
-background: #d2ff52;
-background: -moz-linear-gradient(-45deg, #d2ff52 0%, #91e842 100%);
-background: -webkit-linear-gradient(-45deg, #d2ff52 0%,#91e842 100%);
-background: linear-gradient(135deg, #d2ff52 0%,#91e842 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842',GradientType=1 );
-*/
-
 ::-webkit-scrollbar
 {
 	width: 0px;
@@ -124,19 +115,104 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', end
 	margin-bottom: 20px;
 }
 
+.filters .input-text--container{
+	position: relative;
+	padding-bottom: 20px;
+	width: 100%;
+	text-align: left;
+	overflow-y: hidden;
+}
+
+.filters .options-container{
+	position: absolute;
+	left: 0px;
+	top: 0;
+	height: 40px;
+	line-height: 40px;
+	will-change:transform;
+	transition: .5s;
+	transform: translateX(-100%);
+}
+
+.filters .options-container[open="open"]{
+	transform: translateX(calc(100% + 10px));
+}
+
+.filters .options-container button{
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	font-size: 14px;
+	cursor: pointer;
+	outline: none;
+	border: 1px solid #d0d0d0;
+	opacity: .5;
+	box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,.4);
+	transition: .1s;
+}
+
+.filters .options-container button[active=true]{
+	opacity: 1;
+	box-shadow: none;
+}
+
+.filters .results{
+	width: 100%;
+	text-align: left;
+	font-size: 12px;
+	color: #333;
+	opacity: .9;
+	margin-top: 5px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	-ms-align-items: center;
+	align-items: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	max-width: 300px;
+}
+
+.filters .results .btn-action{
+	font-size: 10px;
+}
+
+.filters .show-filters{
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	background: #fff url(/img/settings.svg) center/25px no-repeat;
+	margin-left: 0px;
+	border: none;
+	transition: .5s;
+	outline: none;
+	cursor: pointer;
+}
+
+.filters .show-filters[open="open"]{
+	transform: rotate(90deg);
+}
+
 .input-text{
 	padding: 0 10px;
 	height: 40px;
 	background: white;
 	border: 1px solid #d0d0d0;
-	width: 300px;
+	width: 100%;
+	max-width: 300px;
 	display: inline-block;
 	text-align: left;
 	font-weight: 500;
 	font-size: 14px;
 	outline: none;
-	background: url(/img/search.svg) 110% center/25px no-repeat;
+	background: #fff url(/img/search.svg) 110% center/25px no-repeat;
 	transition: .3s;
+	z-index: 2;
 }
 
 .input-text::-webkit-input-placeholder{color:#d0d0d0;}
@@ -200,4 +276,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', end
 	0%{background-position:0% 48%}
 	50%{background-position:100% 53%}
 	100%{background-position:0% 48%}
+}
+
+@media screen and (max-width: 1023px){
+  .symbol-list-header{
+  	display: none;
+
+  }
 }

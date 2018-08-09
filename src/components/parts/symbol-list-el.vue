@@ -3,9 +3,13 @@
  <article class="symbol">
 
   <div class="text-container row-between">
+    <span class="assistant">Nombre</span>
     <h2 class="title-list">{{data.name}}</h2>
+    <span class="assistant">Comentarios</span>
     <h3 class="comments" v-html="comments(data.id).length"></h3>
+    <span class="assistant">Divisa</span>
     <h3 class="currency">{{data.currency}}</h3>
+    <span class="assistant">Familia de riesgo</span>
     <h3 class="family-risk">{{data.risk_family}}</h3>
     <router-link class="cover-link" :to="`/activo/${data.id}`"></router-link>
     <img src="/img/right-arrow.svg" class="open-arrow">
@@ -64,6 +68,9 @@
   font-weight: 500;
   width: 60%;
   display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .currency{
@@ -121,8 +128,20 @@
   transition-delay: .5s;
 }
 
+.assistant{
+  display: none;
+}
 
-
-;
+@media screen and (max-width: 1023px){
+  .assistant{
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    font-size: 12px;
+  }
+  .title-list{
+    width: 100%;
+  }
+}
 
 </style>
