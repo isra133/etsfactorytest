@@ -10,8 +10,7 @@
 
         <section class="filters row-between" v-if="!!filterOptions">
 
-          <input type="text" v-model="searchText" class="input-text" placeholder="Escribe para buscar">
-
+          <input type="text" v-model="filterParams.searchText" class="input-text" placeholder="Escribe para buscar">
 
           <div class="filters-container">
 
@@ -38,9 +37,9 @@
             <h3 class="risk_family">Familia de riesgo</h3>
           </header>
 
-          <template v-if="!!symbolsFiltered">
+          <template v-if="!!symbolsFiltered(filterParams)">
 
-            <template v-for="(symbol, key) in symbolsFiltered">
+            <template v-for="(symbol, key) in symbolsFiltered(filterParams)">
               <symbol-el :data="symbol" :key="key"></symbol-el>
             </template>
 
@@ -54,14 +53,14 @@
           <template v-else>
             <symbol-el-fake v-for="n in 16"></symbol-el-fake>
           </template>
-
-        </section>
-
-      </div>
+       
+      </section>
 
     </div>
 
   </div>
+
+</div>
 
 </template>
 
@@ -79,16 +78,19 @@
     },
     data() {
       return {
+        filterParams : {
+          searchText : ''
+        },
         filtersValues : {
           currency : '',
           risk_family : '',
-        }, 
-        searchText : ''
+        } 
       }
     },
     computed : {
       ...mapGetters({
-        symbols : 'getAllSymbols'
+        symbols : 'getAllSymbols',
+        symbolsFiltered : 'getSymbolsfiltered'
       }), 
       filterOptions : function(){
 
@@ -107,39 +109,6 @@
       }
 
       return filterOptions;
-    },
-    symbolsFiltered : function (){
-
-      let searchIn = ['name','risk_family','currency'];
-
-      if(!!this.symbols){
-
-        let symbols = this.symbols.slice();
-
-        symbols = symbols.filter(symbol => {
-
-          let can = true; 
-
-          for(let i in this.filtersValues){
-            (can && !!this.filtersValues[i]) ? can = (symbol[i] == this.filtersValues[i]) : '';
-          }
-
-          if(can && !!this.searchText){
-            searchIn.forEach(e =>{
-              if(can){
-                can = (symbol.name.toLowerCase().includes(this.searchText.toLowerCase()))
-              }
-            });
-          }
-
-          return can;
-
-        });
-
-        return symbols;
-
-      }
-
     }
   },
   filters : {
@@ -154,7 +123,7 @@
   },
   methods: {
     eraseFiltersValues : function(){
-      this.searchText = '';
+      this.filterParams.searchText = '';
       for(let i in this.filtersValues){
         this.filtersValues[i] = '';
       }
@@ -163,17 +132,17 @@
   },
   components: {
     'symbol-el' : symbol_el,
-    'symbol-el-fake' : symbol_el_fake
+    'symbol-el-fake' : symbol_el_fake,
   }
 }
 </script>
 
 <style scoped lang="scss">
 
-  .home-container{
-    background: white;
-    padding: 40px;
-  }
+.home-container{
+  background: white;
+  padding: 40px;
+}
 
 
 </style>

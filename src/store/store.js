@@ -13,13 +13,40 @@ export default new Vuex.Store({
   state: {
   	apiserver : 'http://jsonstub.com/etsfintech/symbols',
     load : false,
-    symbols : ''
+    symbols : '',
   },
   getters : {
 
     getServer : state => state.apiserver,
     getLoad : state => state.load,
     getAllSymbols : state => state.symbols,
+    getSymbolsfiltered(state) {
+      return (params) => {
+
+        let searchIn = ['name', 'currency', 'risk_family'];
+
+        let symbols = new Array();
+
+        if(!!state.symbols){
+
+          state.symbols.forEach(symbol => {
+
+            searchIn.forEach(s => {
+
+              if(symbol[s].toLowerCase().includes(params.searchText.toLowerCase()) && !symbols.some(s => s.id == symbol.id)){
+                symbols.push(symbol);
+              }
+
+            });
+
+          });
+
+        }
+
+
+        return symbols;
+      }
+    }
 
   },
   actions : {
