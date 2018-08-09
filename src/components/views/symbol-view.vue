@@ -46,6 +46,14 @@
             </div>
           </div>
 
+          <div class="data-container" v-if="data.risk_family">
+            <span class="assistant">Familia de riesgo</span>
+            <div class="breadcrumb row-start">
+              <h2 v-html="data.risk_family.name"></h2>
+              <h2 v-html="data.risk_family.sub_family.name"></h2>
+            </div>
+          </div>
+
 
           <div class="data-container" v-if="data.sector">
             <span class="assistant">Sector</span>
@@ -56,13 +64,7 @@
           </div>
 
 
-          <div class="data-container" v-if="data.risk_family">
-            <span class="assistant">Familia de riesgo</span>
-            <div class="breadcrumb row-start">
-              <h2 v-html="data.risk_family.name"></h2>
-              <h2 v-html="data.risk_family.sub_family.name"></h2>
-            </div>
-          </div>
+          
 
 
           <div class="chart-container">

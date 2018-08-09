@@ -55,7 +55,7 @@
       dateToString : function(value){
         let months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
         value = new Date(value);
-        let dateString = `${value.getDate()} ${months[value.getMonth()]}, ${value.getFullYear()}`;
+        let dateString = `${value.getDate()} ${months[value.getMonth()]}, ${value.getFullYear()} - ${value.getHours()} : ${value.getMinutes()}`;
         return dateString;
       }
     }
