@@ -14,3 +14,9 @@ npm run serve
 ```
 npm run build
 ```
+
+### Demo
+```
+https://etsfactorytest.netlify.com
+```
+
