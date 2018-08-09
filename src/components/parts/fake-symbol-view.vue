@@ -7,20 +7,32 @@
 
     <div class="container -big row-between ais">
 
-      <div class="info-container">
-    
-      </div>
+      <div class="info-container  column-center">
 
-      <div class="comments-view"></div>
+       <orbit-spinner
+       :animation-duration="1200"
+       :size="80"
+       color="#333333"
+       />
 
-    </div>
+       <h2 class="title">Cargando</h2>
+
+     </div>
+
+     <div class="comments-view"></div>
+
+   </div>
 
 
-  </section>
+ </section>
 
 </template>
 
 <script lang="js">
+  
+  import { OrbitSpinner } from 'epic-spinners'
+
+
   export default  {
     name: 'fake-symbol-view',
     props: [],
@@ -35,8 +47,8 @@
     methods: {
 
     },
-    computed: {
-
+    components: {
+      OrbitSpinner
     }
   }
 </script>
@@ -44,14 +56,11 @@
 <style scoped lang="scss">
 
 .title{
-  width: 60%;
+  width: 100%;
+  text-align: center;
   display: inline-block;
-   -webkit-animation: loadAnimation 2s ease infinite;
-  -moz-animation: loadAnimation 2s ease infinite;
-  animation: loadAnimation 2s ease infinite;
-  background: linear-gradient(274deg, #efefef, #f8f9fa);
-  background-size: 400% 400%;
   height: 49px;
+  margin-top: 30px;
 }
 
 .info-container{
@@ -60,7 +69,7 @@
   background: white;
   padding: 40px 40px;
   height: 80vh;
-  text-align: left;
+  text-align:center;
 }
 
 .comments-view {

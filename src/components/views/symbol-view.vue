@@ -3,6 +3,7 @@
   <section class="wrapper -symbol-view">
 
 
+
     <template v-if="!!data">
 
 
@@ -11,6 +12,8 @@
         <router-link to="/" class="btn-action volver">< Volver</router-link>
 
         <section class="info-container">
+
+
 
           <h2 class="title">Datos del activo</h2>
 
@@ -64,13 +67,12 @@
           </div>
 
 
-          
-
-
           <div class="chart-container">
             <h2 class="title">Gráfica de precios</h2>
             <chart :datasets="data.prices" v-if="!!data"></chart>
           </div>
+
+         
 
         </section>
 
@@ -89,7 +91,6 @@
     </template>
 
 
-
   </section>
 
 </template>
@@ -104,6 +105,7 @@
   import comments from '@/components/parts/comments-view';
 
   import symbols_related from '@/components/parts/symbols-related'
+
 
   export default  {
     name: 'symbol-view',
@@ -127,7 +129,7 @@
       'symbols-related' : symbols_related,
       'chart' : chart,
       'comments-view' : comments,
-      'fake-symbol-view' : fake_symbol_view
+      'fake-symbol-view' : fake_symbol_view,
     },
     watch : {
       '$route' : function(){
